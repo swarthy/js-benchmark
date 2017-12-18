@@ -1,0 +1,12 @@
+{
+  "name": "set_vs_object_selection",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "bluebird": "^3.5.0",
+    "lodash": "^4.17.4",
+    "stats-array": "^0.1.2"
+  }
+}
