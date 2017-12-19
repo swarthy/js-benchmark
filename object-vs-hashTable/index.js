@@ -3,6 +3,7 @@ const omit = require('lodash/omit')
 const random = require('lodash/random')
 const stats = require('stats-array')
 const HashTable = require('./HashTable')
+const HashTableES6 = require('./HashTableES6')
 
 const numSort = (a, b) => a - b
 
@@ -70,7 +71,7 @@ function createAndRun(
       return result
     }
   }
-  function createCustomTable(items) {
+  function createCustomTable(HashTableClass, items) {
     function compareArray(arr1, arr2) {
       const len1 = arr1.length
       const len2 = arr2.length
@@ -99,7 +100,7 @@ function createAndRun(
     const LIMIT = 8
 
     return function hashTable() {
-      const hash = new HashTable({
+      const hash = new HashTableClass({
         compare: compareArray,
         hashFunc,
         limit: LIMIT
@@ -151,15 +152,20 @@ function createAndRun(
   )
   suite
     .add('object hashing', createObjectHashing(items))
-    .add('custom hash table', createCustomTable(items))
+    .add('custom hash table', createCustomTable(HashTable, items))
+    .add('custom hash table (es6)', createCustomTable(HashTableES6, items))
     .on('cycle', onCycle)
     .on('complete', onComplete)
     .run()
 }
 
-const ITEMS_COUNTS = [100, 1000, 10000, 50000]
-const ALPHABETS = [1, 2, 16, 256, 1024]
-const SIZES = [[1, 1], [1, 2], [2, 2], [2, 4], [4, 8], [2, 8]]
+// const ITEMS_COUNTS = [100, 1000, 10000, 50000]
+// const ALPHABETS = [1, 2, 16, 256, 1024]
+// const SIZES = [[1, 1], [1, 2], [2, 2], [2, 4], [4, 8], [2, 8]]
+
+const ITEMS_COUNTS = [100, 1000]
+const ALPHABETS = [1, 2, 256, 1024]
+const SIZES = [[1, 1], [1, 2], [4, 8], [2, 8]]
 
 for (const itemsCount of ITEMS_COUNTS) {
   for (const alphabetSize of ALPHABETS) {
