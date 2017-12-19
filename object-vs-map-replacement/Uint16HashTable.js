@@ -2,18 +2,14 @@
   https://gist.github.com/alexhawkins/f6329420f40e5cafa0a4
  */
 
-function defaultCompare(a, b) {
-  return a === b
-}
-
-function defaultHashFunc(key, max) {
-  var hash = 0
-  for (var i = 0; i < key.length; i++) {
-    var letter = key[i]
-    hash = (hash << 5) + letter.charCodeAt(0)
-    hash = (hash & hash) % max
-  }
-  return hash
+function defaultHashInteger(a) {
+  a = a + 0x7ed55d16 + (a << 12)
+  a = a ^ 0xc761c23c ^ (a >> 19)
+  a = a + 0x165667b1 + (a << 5)
+  a = (a + 0xd3a2646c) ^ (a << 9)
+  a = a + 0xfd7046c5 + (a << 3)
+  a = a ^ 0xb55a4f09 ^ (a >> 16)
+  return a
 }
 
 function reduceFlatten(resultArr, item) {
@@ -21,12 +17,11 @@ function reduceFlatten(resultArr, item) {
   return resultArr
 }
 
-var HashTable = function({ limit, compare, hashFunc }) {
+var HashTable = function({ limit, hashFunc }) {
   this._storage = []
   this._count = 0
   this._limit = limit || 8
-  this._compare = compare || defaultCompare
-  this._hashFunc = hashFunc || defaultHashFunc
+  this._hashFunc = hashFunc || defaultHashInteger
 }
 
 HashTable.prototype.insert = function(key, value) {
@@ -48,7 +43,7 @@ HashTable.prototype.insert = function(key, value) {
   //key value pairs within our bucket. If there are any, override them.
   for (var i = 0; i < bucket.length; i++) {
     var tuple = bucket[i]
-    if (this._compare(tuple[0], key)) {
+    if (tuple[0] === key) {
       //overide value stored at this key
       tuple[1] = value
       override = true
@@ -62,7 +57,7 @@ HashTable.prototype.insert = function(key, value) {
     //the key of the tuple we are inserting. These tupules are in the same
     //bucket because their keys all equate to the same numeric index when
     //passing through our hash function.
-    bucket.push([key, value])
+    bucket.push(new Uint16Array([key, value]))
     this._count++
     //now that we've added our new key/val pair to our storage
     //let's check to see if we need to resize our storage
@@ -83,7 +78,7 @@ HashTable.prototype.remove = function(key) {
   for (var i = 0; i < bucket.length; i++) {
     var tuple = bucket[i]
     //check to see if key is inside bucket
-    if (this._compare(tuple[0], key)) {
+    if (tuple[0] === key) {
       //if it is, get rid of this tuple
       bucket.splice(i, 1)
       this._count--
@@ -105,7 +100,7 @@ HashTable.prototype.retrieve = function(key) {
 
   for (var i = 0; i < bucket.length; i++) {
     var tuple = bucket[i]
-    if (this._compare(tuple[0], key)) {
+    if (tuple[0] === key) {
       return tuple[1]
     }
   }
