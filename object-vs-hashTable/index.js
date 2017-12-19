@@ -3,7 +3,6 @@ const omit = require('lodash/omit')
 const random = require('lodash/random')
 const stats = require('stats-array')
 const HashTable = require('./HashTable')
-const HashTableES6 = require('./HashTableES6')
 
 const numSort = (a, b) => a - b
 
@@ -150,10 +149,10 @@ function createAndRun(
   const suite = new Benchmark.Suite(
     `Items: ${itemsCount} Alphabet: ${alphabetSize} [${minElementCount}, ${maxElementCount}]`
   )
+
   suite
     .add('object hashing', createObjectHashing(items))
     .add('custom hash table', createCustomTable(HashTable, items))
-    .add('custom hash table (es6)', createCustomTable(HashTableES6, items))
     .on('cycle', onCycle)
     .on('complete', onComplete)
     .run()

@@ -16,6 +16,11 @@ function defaultHashFunc(key, max) {
   return hash
 }
 
+function reduceFlatten(resultArr, item) {
+  resultArr.push.apply(resultArr, item)
+  return resultArr
+}
+
 var HashTable = function({ limit, compare, hashFunc }) {
   this._storage = []
   this._count = 0
@@ -72,7 +77,7 @@ HashTable.prototype.remove = function(key) {
   var index = this._hashFunc(key, this._limit)
   var bucket = this._storage[index]
   if (!bucket) {
-    return null
+    return undefined
   }
   //iterate over the bucket
   for (var i = 0; i < bucket.length; i++) {
@@ -95,7 +100,7 @@ HashTable.prototype.retrieve = function(key) {
   var bucket = this._storage[index]
 
   if (!bucket) {
-    return null
+    return undefined
   }
 
   for (var i = 0; i < bucket.length; i++) {
@@ -105,17 +110,7 @@ HashTable.prototype.retrieve = function(key) {
     }
   }
 
-  return null
-}
-
-HashTable.prototype.hashFunc = function(str, max) {
-  var hash = 0
-  for (var i = 0; i < str.length; i++) {
-    var letter = str[i]
-    hash = (hash << 5) + letter.charCodeAt(0)
-    hash = (hash & hash) % max
-  }
-  return hash
+  return undefined
 }
 
 HashTable.prototype.resize = function(newLimit) {
@@ -138,15 +133,8 @@ HashTable.prototype.resize = function(newLimit) {
   )
 }
 
-const flattenReduce = (resultArr, item) => {
-  resultArr.push.apply(resultArr, item)
-  return resultArr
-}
-
 HashTable.prototype.retrieveAll = function() {
-  return this._storage.reduce(flattenReduce, [])
-  // console.log(this._storage)
-  //console.log(this._limit);
+  return this._storage.reduce(reduceFlatten, [])
 }
 
 module.exports = HashTable
