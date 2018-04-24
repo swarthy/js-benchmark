@@ -64,7 +64,7 @@ function objectCreateTest() {
   )
 
   return function() {
-    const DATA_SOURCE = getDataSource()
+    // const DATA_SOURCE = getDataSource()
     const req = Object.create(pinoReqProto)
     req.id = DATA_SOURCE.id
     req.method = DATA_SOURCE.method
@@ -77,7 +77,7 @@ function objectCreateTest() {
 
 function pojoTest() {
   return function() {
-    const DATA_SOURCE = getDataSource()
+    // const DATA_SOURCE = getDataSource()
     return {
       id: DATA_SOURCE.id,
       method: DATA_SOURCE.method,
@@ -88,8 +88,6 @@ function pojoTest() {
     }
   }
 }
-
-const items = new Uint16Array([10, 20, 30, 30, 40])
 
 const suite = new Benchmark.Suite('object')
 
@@ -102,8 +100,8 @@ function onComplete() {
 }
 
 suite
-  .add('Object.create', objectCreateTest(items))
-  .add('POJO', pojoTest(items))
+  .add('Object.create', objectCreateTest())
+  .add('POJO', pojoTest())
   .on('cycle', onCycle)
   .on('complete', onComplete)
   .run()
