@@ -1,28 +1,30 @@
 const Benchmark = require('benchmark')
 
-function declaredOutside(k) {
-  return k * 1.25
+function declaredOutside(k, coef) {
+  return k * coef
+  // return k * 1.25
 }
-function optFn(n) {
-  return declaredOutside(n) + (n > 1 ? optFn(n - 1) : 0)
+function optFn(n, coef) {
+  return declaredOutside(n, coef) + (n > 1 ? optFn(n - 1, coef) : 0)
 }
 
-function noOptFn(n) {
+function noOptFn(n, coef) {
   function declaredInside(k) {
-    return k * 1.25
+    return k * coef
+    // return k * 1.25
   }
-  return declaredInside(n) + (n > 1 ? noOptFn(n - 1) : 0)
+  return declaredInside(n) + (n > 1 ? noOptFn(n - 1, coef) : 0)
 }
 
-function opTest(n) {
+function optTest(n, coef) {
   return function() {
-    optFn(n)
+    optFn(n, coef)
   }
 }
 
-function noOpTest(n) {
+function noOptTest(n, coef) {
   return function() {
-    noOptFn(n)
+    noOptFn(n, coef)
   }
 }
 
@@ -36,10 +38,10 @@ function onComplete() {
   console.log(this.name, 'Fastest is ' + this.filter('fastest').map('name'))
 }
 
-const size = 10000
+const size = 1000
 suite
-  .add('opt test', opTest(size))
-  .add('noopt test', noOpTest(size))
+  .add('opt test', optTest(size, 1.25))
+  .add('noopt test', noOptTest(size, 1.25))
   .on('cycle', onCycle)
   .on('complete', onComplete)
   .run()
