@@ -1,11 +1,6 @@
 const Benchmark = require('benchmark')
 const omit = require('lodash/omit')
 
-const suite10add = new Benchmark.Suite('10 elements add')
-const suite10has = new Benchmark.Suite('10 elements has')
-const suite10remove = new Benchmark.Suite('10 elements remove')
-const suite10getAll = new Benchmark.Suite('10 elements getAll')
-
 const items10 = []
 const items100 = []
 const items1000 = []
@@ -21,7 +16,7 @@ for (let i = 0; i < 10000; i++) {
   if (i < 1000) {
     items1000.push(i + 1)
   }
-  items10000.push(i + 1)
+  // items10000.push(i + 1)
 }
 
 function createSet() {
@@ -51,18 +46,20 @@ function createObjectInit(ids) {
 function createTestSetAdd(ids) {
   return function() {
     ids.forEach(id => this.selection.add(id))
+    this.selection = new Set(this.selection)
   }
 }
 
 function createTestSetRemove(ids) {
   return function() {
     ids.forEach(id => this.selection.delete(id))
+    this.selection = new Set(this.selection)
   }
 }
 
 function createTestSetHas(ids) {
   return function() {
-    ids.forEach(id => this.selection.has(id))
+    const hasIds = ids.map(id => this.selection.has(id))
   }
 }
 
@@ -76,7 +73,7 @@ function createTestObjectAdd(ids) {
   return function() {
     const newSelection = Object.assign({}, this.selection)
     ids.forEach(id => {
-      newSelection = true
+      newSelection[id] = true
     })
     this.selection = newSelection
   }
@@ -92,13 +89,13 @@ function createTestObjectRemove(ids) {
 
 function createTestObjectHas(ids) {
   return function() {
-    ids.forEach(id => this.selection[id])
+    const hasIds = ids.map(id => !!this.selection[id])
   }
 }
 
 function createTestObjectGetAll(ids) {
   return function() {
-    return Object.keys(this.selection)
+    return Object.keys(this.selection).map(i => +i)
   }
 }
 
@@ -168,6 +165,6 @@ let suites = []
 suites = suites.concat(setupSuites(items10))
 suites = suites.concat(setupSuites(items100))
 suites = suites.concat(setupSuites(items1000))
-suites = suites.concat(setupSuites(items10000))
+// suites = suites.concat(setupSuites(items10000))
 
 suites.forEach(suite => suite.run())

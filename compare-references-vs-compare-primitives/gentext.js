@@ -1,0 +1,10 @@
+const fs = require('fs')
+const path = require('path')
+
+const base = 'asl;df234234jzl;xcjvklahdfkhajkasdkfhakl;sdfjalsdjfasdfl;l;asfsdsdfasdfsdsfdfasfajkl;sdfjkl;asdffasdfadfasdfhlahfhlasdfasdflkljdsfhajklsjkahsdflkahsdfkljashdklfhaskldjfhaklsdfhakljsdfhajklsdhfklasjdhfklasdhkfajklsdfhaksjldfhaklsdfhajklsdfhlasldhfajklsdfhlsdfjaksdhlflajksdhfalsjkdfalsdfkllajeu312iqwtuilzkxcjv;lzxcjv;lertsbdfasdfasdfasdfmnzxc4kjlvhasjkldfhajklsdfhaopiguyaopdfgsdjklfgsjkdfgbwrtbmnwertjklwerhtjklhzfgpasydfguishdfgjklsdfhgjklsdfgbsjkdfhgsjkldfhgjklsdhfjklvbzhxcvuyhapsdfhajklsdfhajklrthjklwertjklwerhtjklhzdfjklzhxklgvhk'.repeat(
+  2
+)
+
+const text = base.repeat(1000000)
+
+fs.writeFileSync(path.resolve(__dirname, './text.txt'), text)
