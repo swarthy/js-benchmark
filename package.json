@@ -5,9 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "benchmark": "^2.1.4",
-    "bluebird": "^3.5.0",
+    "bluebird": "^3.5.5",
     "hash-table": "^0.1.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.15",
     "stats-array": "^0.1.2"
   }
 }

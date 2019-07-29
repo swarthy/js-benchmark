@@ -5,32 +5,39 @@
 benchmark@^2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/benchmark/-/benchmark-2.1.4.tgz#09f3de31c916425d498cc2ee565a0ebf3c2a5629"
+  integrity sha1-CfPeMckWQl1JjMLuVloOvzwqVik=
   dependencies:
     lodash "^4.17.4"
     platform "^1.3.3"
 
-bluebird@^3.5.0:
-  version "3.5.1"
-  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
+bluebird@^3.5.5:
+  version "3.5.5"
+  resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.5.tgz#a8d0afd73251effbbd5fe384a77d73003c17a71f"
+  integrity sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==
 
 hash-table@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/hash-table/-/hash-table-0.1.0.tgz#0b32b17125fd98e6f8a0a3ebcaaf7a1dd5a438b8"
+  integrity sha1-CzKxcSX9mOb4oKPryq96HdWkOLg=
   dependencies:
     universal-hash-function "0.1.0"
 
-lodash@^4.17.4:
-  version "4.17.4"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
+lodash@^4.17.15, lodash@^4.17.4:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 platform@^1.3.3:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.4.tgz#6f0fb17edaaa48f21442b3a975c063130f1c3ebd"
+  version "1.3.5"
+  resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.5.tgz#fb6958c696e07e2918d2eeda0f0bc9448d733444"
+  integrity sha512-TuvHS8AOIZNAlE77WUDiR4rySV/VMptyMfcfeoMgs4P8apaZM3JrnbzBiixKUv+XR6i+BXrQh8WAnjaSPFO65Q==
 
 stats-array@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/stats-array/-/stats-array-0.1.2.tgz#221c6bbe934a9697d69c28f47462e05aff78c926"
+  integrity sha1-IhxrvpNKlpfWnCj0dGLgWv94ySY=
 
 universal-hash-function@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/universal-hash-function/-/universal-hash-function-0.1.0.tgz#58435e45dafa7c65055b60150c80a8a389cff63d"
+  integrity sha1-WENeRdr6fGUFW2AVDICoo4nP9j0=
