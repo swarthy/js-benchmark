@@ -17,6 +17,8 @@ for (let i = 0; i < N; i++) {
   items.push(hugeIntStr)
 }
 
+const allBigInts = items.map(i => BigInt(i))
+
 function compareBigInts(a, b) {
   return a < b ? -1 : a > b ? 1 : 0
 }
@@ -34,7 +36,7 @@ function compareStringBigInts(a, b) {
 }
 
 function bigIntRun1() {
-  const bigInts = items.map(i => BigInt(i))
+  const bigInts = allBigInts.slice(0)
   bigInts.sort(compareBigInts)
 }
 
