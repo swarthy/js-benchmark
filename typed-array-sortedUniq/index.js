@@ -34,32 +34,8 @@ function sortedUniqUint16Array(array) {
   return newArray
 }
 
-function sortedUniqUint16ArrayNaive(array) {
-  var index = -1
-  var length = array.length
-  var resIndex = 0
-  var result = []
-  var seen
-
-  while (++index < length) {
-    var value = array[index]
-
-    if (index === 0 || value !== seen) {
-      seen = value
-      result[resIndex++] = value
-    }
-  }
-  return new Uint16Array(result)
-}
-
 function sortedUniqLodash(array) {
   return new Uint16Array(sortedUniq(array))
-}
-
-function naiveTest(array) {
-  return function() {
-    return sortedUniqUint16ArrayNaive(array)
-  }
 }
 
 function customTest(array) {
@@ -88,7 +64,6 @@ function onComplete() {
 
 suite
   .add('lodash', lodashTest(items))
-  .add('naive', naiveTest(items))
   .add('custom', customTest(items))
   .on('cycle', onCycle)
   .on('complete', onComplete)
