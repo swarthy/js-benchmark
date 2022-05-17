@@ -6,6 +6,10 @@ async function asyncFunction() {
   return 123;
 }
 
+function syncFunction() {
+  return 123;
+}
+
 function promiseFunction() {
   return Promise.resolve(123);
 }
@@ -35,6 +39,11 @@ suite
     name: 'return await async',
     defer: true,
     fn: createFn(async () => await asyncFunction())
+  })
+  .add({
+    name: 'return await sync',
+    defer: true,
+    fn: createFn(async () => await syncFunction())
   })
   .on('cycle', function (event) {
     console.log(String(event.target));
