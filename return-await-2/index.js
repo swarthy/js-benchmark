@@ -1,0 +1,71 @@
+const Benchmark = require('benchmark');
+const Bluebird = require('bluebird');
+
+const suite = new Benchmark.Suite('simple');
+
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const asyncImmediate = () => new Promise((resolve) => setImmediate(resolve));
+
+async function asyncFunction() {
+  // await Bluebird.delay(10);
+  await asyncImmediate();
+  return 123;
+}
+
+function syncFunction() {
+  return 123;
+}
+
+function promiseFunction() {
+  // return delay(100).then(() => 123);
+  // return Bluebird.delay(10).then(() => 123);
+  return asyncImmediate().then(() => 123);
+}
+
+const createFn = (fn) =>
+  function (deferred) {
+    fn().then(() => deferred.resolve());
+  };
+
+suite
+  .add({
+    name: 'return Promise',
+    defer: true,
+    fn: createFn(() => promiseFunction())
+  })
+  .add({
+    name: 'return await Promise',
+    defer: true,
+    fn: createFn(async () => await promiseFunction())
+  })
+  .add({
+    name: 'return async',
+    defer: true,
+    fn: createFn(() => asyncFunction())
+  })
+  .add({
+    name: 'return await async',
+    defer: true,
+    fn: createFn(async () => await asyncFunction())
+  })
+  .add({
+    name: 'return await sync',
+    defer: true,
+    fn: createFn(async () => {
+      // await Bluebird.delay(10);
+      // await delay(100);
+      await asyncImmediate();
+      return await syncFunction();
+    })
+  })
+  .on('cycle', function (event) {
+    console.log(String(event.target));
+  })
+  .on('complete', function () {
+    console.log('Fastest is ' + this.filter('fastest').map('name'));
+  });
+
+suite.run({
+  async: true,
+  defer: true
+});
