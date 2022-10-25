@@ -46,3 +46,8 @@ universal-hash-function@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/universal-hash-function/-/universal-hash-function-0.1.0.tgz#58435e45dafa7c65055b60150c80a8a389cff63d"
   integrity sha1-WENeRdr6fGUFW2AVDICoo4nP9j0=
+
+uuid@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-9.0.0.tgz#592f550650024a38ceb0c562f2f6aa435761efb5"
+  integrity sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==
