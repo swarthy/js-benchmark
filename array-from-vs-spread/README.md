@@ -1,6 +1,6 @@
 ```shell
-$  date && node -e "console.log(process.versions)" && node index.js
-Пн 14 апр 2025 13:01:02 +05
+$ date && node -e "console.log(process.versions)" && node index.js
+Пн 14 апр 2025 13:18:25 +05
 {
   node: '22.14.0',
   acorn: '8.14.0',
@@ -29,16 +29,28 @@ $  date && node -e "console.log(process.versions)" && node index.js
   v8: '12.4.254.21-node.22',
   zlib: '1.3.1'
 }
-array.from x 648,478 ops/sec ±0.50% (95 runs sampled)
-spread x 655,138 ops/sec ±0.52% (99 runs sampled)
+array.from x 641,651 ops/sec ±0.76% (94 runs sampled)
+spread x 649,222 ops/sec ±0.57% (93 runs sampled)
 array.from-vs-spread n=1000 Fastest is spread
-array.from x 81,579 ops/sec ±0.63% (92 runs sampled)
-spread x 82,218 ops/sec ±0.39% (95 runs sampled)
-array.from-vs-spread n=10000 Fastest is spread,array.from
-array.from x 2,913 ops/sec ±0.73% (94 runs sampled)
-spread x 2,896 ops/sec ±0.50% (88 runs sampled)
-array.from-vs-spread n=100000 Fastest is array.from,spread
-array.from x 481 ops/sec ±0.51% (89 runs sampled)
-spread x 482 ops/sec ±0.56% (86 runs sampled)
-array.from-vs-spread n=1000000 Fastest is spread,array.from
+array.fromWithMap x 68,321 ops/sec ±0.38% (96 runs sampled)
+spreadWithMap x 344,489 ops/sec ±0.59% (92 runs sampled)
+array.from-vs-spread with MAP n=1000 Fastest is spreadWithMap
+array.from x 80,928 ops/sec ±0.45% (98 runs sampled)
+spread x 80,548 ops/sec ±0.48% (94 runs sampled)
+array.from-vs-spread n=10000 Fastest is array.from,spread
+array.fromWithMap x 7,745 ops/sec ±0.42% (99 runs sampled)
+spreadWithMap x 42,750 ops/sec ±0.51% (99 runs sampled)
+array.from-vs-spread with MAP n=10000 Fastest is spreadWithMap
+array.from x 2,883 ops/sec ±0.58% (94 runs sampled)
+spread x 2,912 ops/sec ±0.60% (95 runs sampled)
+array.from-vs-spread n=100000 Fastest is spread
+array.fromWithMap x 475 ops/sec ±0.87% (88 runs sampled)
+spreadWithMap x 1,462 ops/sec ±0.66% (95 runs sampled)
+array.from-vs-spread with MAP n=100000 Fastest is spreadWithMap
+array.from x 486 ops/sec ±0.63% (93 runs sampled)
+spread x 485 ops/sec ±0.58% (89 runs sampled)
+array.from-vs-spread n=1000000 Fastest is array.from,spread
+array.fromWithMap x 51.77 ops/sec ±1.38% (68 runs sampled)
+spreadWithMap x 231 ops/sec ±1.02% (86 runs sampled)
+array.from-vs-spread with MAP n=1000000 Fastest is spreadWithMap
 ```
